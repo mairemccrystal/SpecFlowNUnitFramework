@@ -4,13 +4,15 @@ using OpenQA.Selenium.Chrome;
 
 namespace SpecFlowNunit.Drivers
 {
-    public class BrowserDriver : IDisposable
+    public class BrowserDriver
+    //: IDisposable
     {
         private readonly Lazy<IWebDriver> _currentWebDriverLazy;
         private bool _isDisposed;
 
         public BrowserDriver()
         {
+            new ChromeDriver();
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -30,7 +32,7 @@ namespace SpecFlowNunit.Drivers
 
             var chromeOptions = new ChromeOptions();
 
-            var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
+            var chromeDriver = new ChromeDriver(chromeOptions);
 
             return chromeDriver;
         }
@@ -38,7 +40,7 @@ namespace SpecFlowNunit.Drivers
         /// <summary>
         /// Disposes the Selenium web driver (closing the browser) after the Scenario completed
         /// </summary>
-        public void Dispose()
+     /*   public void Dispose()
         {
             if (_isDisposed)
             {
@@ -51,7 +53,7 @@ namespace SpecFlowNunit.Drivers
             }
 
             _isDisposed = true;
-        }
+        }*/
     }
 }
 
